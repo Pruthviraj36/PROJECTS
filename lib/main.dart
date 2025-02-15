@@ -7,31 +7,31 @@ import 'dart:io';
 
 import 'database_helper.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ProfileManager(),
-      child: const MatrimonyApp(),
-    ),
-  );
-}
-
-class MatrimonyApp extends StatelessWidget {
-  const MatrimonyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Forever Matrimony',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(),
-        primarySwatch: Colors.pink,
-      ),
-      home: const HomePage(),
-    );
-  }
-}
+// void main() {
+//   runApp(
+//     ChangeNotifierProvider(
+//       create: (context) => ProfileManager(),
+//       child: const MatrimonyApp(),
+//     ),
+//   );
+// }
+//
+// class MatrimonyApp extends StatelessWidget {
+//   const MatrimonyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Forever Matrimony',
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(
+//         textTheme: GoogleFonts.poppinsTextTheme(),
+//         primarySwatch: Colors.pink,
+//       ),
+//       home: const HomePage(),
+//     );
+//   }
+// }
 
 // class HomePage extends StatelessWidget {
 //   const HomePage({super.key});
@@ -168,59 +168,87 @@ class MatrimonyApp extends StatelessWidget {
 //   }
 // }
 
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ProfileManager(),
+      child: const MatrimonyApp(),
+    ),
+  );
+}
+
+class MatrimonyApp extends StatelessWidget {
+  const MatrimonyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Forever Matrimony',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        primarySwatch: Colors.blueGrey,
+        primaryColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        scaffoldBackgroundColor: Colors.white,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+        ),
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text('Soul Bridge'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite_border),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.message),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/images/background.jpg',
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.4),
-                    Colors.black.withOpacity(0.9),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            Text(
-              "Serious people around you",
-              style: GoogleFonts.playfairDisplay(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.pinkAccent,
-              ),
-            ),
             const SizedBox(height: 10),
             Text(
-              "",
-              style: GoogleFonts.playfairDisplay(
+              "Find your perfect match",
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: Colors.grey.shade700,
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 10),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 children: [
                   buildMenuCard(
                     context,
@@ -249,15 +277,15 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pinkAccent,
+                backgroundColor: Colors.blueGrey,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
                 padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
               ),
               onPressed: () {
                 showDialog(
@@ -265,8 +293,7 @@ class HomePage extends StatelessWidget {
                   builder: (context) {
                     return AlertDialog(
                       title: const Text("Registration"),
-                      content:
-                          const Text("Registration feature coming soon!"),
+                      content: const Text("Registration feature coming soon!"),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -279,7 +306,7 @@ class HomePage extends StatelessWidget {
               },
               child: Text(
                 "Register as moderator",
-                style: GoogleFonts.playfairDisplay(
+                style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -290,13 +317,37 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildMenuCard(
       BuildContext context, IconData icon, String title, Widget page) {
     return Card(
-      elevation: 5,
+      elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
@@ -305,11 +356,11 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 40, color: Colors.pinkAccent),
+            Icon(icon, size: 40, color: Colors.blueGrey),
             const SizedBox(height: 10),
             Text(
               title,
-              style: GoogleFonts.playfairDisplay(
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: Colors.black87,
